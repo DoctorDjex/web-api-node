@@ -2,7 +2,7 @@
   "port": 8080,
   "TOKEN_SECRET": "s3cr3t_F00b4r",
   "db": {
-    "mongo": "mongodb://localhost:27017/todo-list-production",
-    "cache": "url"
+    "mongo": "mongodb://localhost:27017/events-manager-production",
+    "cache": "redis://localhost:6379/0"
   }
 }
