@@ -15,7 +15,15 @@ module.exports = function(server){
         lastName: {
             type: String,
             default: 'bar'
-        }
+        },
+        eventsOrganizer : [{
+            type:server.mongoose.Schema.Types.ObjectId,
+            ref: 'Event'
+        }],
+        eventsParticipant : [{
+            type:server.mongoose.Schema.Types.ObjectId,
+            ref: 'Event'
+        }]
     });
 
 

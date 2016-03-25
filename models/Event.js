@@ -19,7 +19,21 @@ module.exports = function(server){
         maxUsers:{
             type: Number,
             required : true
-        }
+        },
+        category: {
+            type: server.mongoose.Schema.Types.ObjectId,
+            ref: 'Category',
+            required:true
+        },
+        organizer: {
+            type: server.mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        },
+        participants : [{
+            type:server.mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        }]
 
     });
 
