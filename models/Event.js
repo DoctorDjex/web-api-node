@@ -18,6 +18,7 @@ module.exports = function(server){
         },
         maxUsers:{
             type: Number,
+            min: 10,
             required : true
         },
         category: {
