@@ -4,6 +4,7 @@ module.exports = function(server){
     ensureAuthenticated: require('./ensureAuthenticated')(server),
     ensureBodyFields: require('./ensureBodyFields')(server),
     is: require('./roleChecker')(server),
+    getUser: require('./getUser')(server),
     cache: {
       get: require('./getCache')(server),
       del: require('./delCache')(server),

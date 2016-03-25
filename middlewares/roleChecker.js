@@ -1,38 +1,40 @@
 module.exports = function(server){
   return function(roles, modelType){
     return function(req, res, next){
-      var User = server.models.User;
       var Model = server.models[modelType];
 
       if( !Model )
         return res.status(500).send("Server error");
 
-      var userQuery = User.findById(req.auth.userId)
-            .populate('role');
+      Model.findById(req.params.id, function(errModel, data){
+        if(errModel)
+          return res.status(500).send(errModel);
 
-      userQuery.exec(function(err, user){
-        if(err)
-          return res.status(500).send(err);
+        var authorized = false;
 
-        Model.findById(req.params.id, function(errModel, data){
-          if(errModel)
-            return res.status(500).send(errModel);
-
-          var authorized = false;
-
-          roles.forEach(function(value){
-            if( ( value == "owner" && JSON.stringify(data.user) === JSON.stringify(user._id) ) ||
-                ( user.role.label == value ) ){
-              authorized = true;
-            }
-          });
-
-          if(!authorized)
-            return res.status(401).send("Unauthorized");
-
-          next();
+        roles.forEach(function(role){
+          if( (role == "owner" && isOwner(data)) ||
+              hasRole(role)
+            ){
+            authorized = true;
+          }
         });
+
+        if(!authorized)
+          return res.status(401).send("Unauthorized");
+
+        next();
       });
+
+      function isOwner(resource){
+        return JSON.stringify(resource.user) === JSON.stringify(req.auth.user._id);
+      }
+
+      function hasRole(role){
+        console.log(role);
+        console.log(req.auth.user.role.label);
+        return role === req.auth.user.role.label;
+      }
     };
   }
 };
