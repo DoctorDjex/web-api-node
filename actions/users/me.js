@@ -11,6 +11,6 @@ module.exports = function(server){
         res.send(data);
       });
 
-      
+
   }
 }

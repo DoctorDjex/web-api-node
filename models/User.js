@@ -16,6 +16,10 @@ module.exports = function(server){
             type: String,
             default: 'bar'
         },
+        role: {
+            type:server.mongoose.Schema.Types.ObjectId,
+            ref: 'Role'
+        },
         eventsOrganizer : [{
             type:server.mongoose.Schema.Types.ObjectId,
             ref: 'Event'

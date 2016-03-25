@@ -8,18 +8,17 @@ module.exports = function(server){
     var Role = server.models.Role;
 
     var user = new User(req.body);
-    user.save(function(err, data){
+    Role.findOne({label: server.settings.DEFAULT_ROLE}, function(err, data){
       if (err)
         return res.status(500).send(err);
-      res.send(data);
-    })
-    // Role.findOne({label: server.settings.DEFAULT_ROLE}, function(err, data){
-    //   if (err)
-    //     return res.status(500).send(err);
-    //
-    //   user.role = data._id;
-    //
-    //
-    // });
+
+      user.role = data._id;
+      user.save(function(err, data){
+        if (err)
+          return res.status(500).send(err);
+        res.send(data);
+      })
+
+    });
   };
 }
