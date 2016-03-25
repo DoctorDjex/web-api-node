@@ -3,7 +3,11 @@ module.exports = function(server){
         label: {
             type: String,
             required: true
-        }
+        },
+        events : [{
+            type:server.mongoose.Schema.Types.ObjectId,
+            ref: 'Event'
+        }]
     });
 
     CategorySchema.plugin(require('mongoose-timestamp'));
