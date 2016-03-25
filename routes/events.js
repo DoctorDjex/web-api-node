@@ -13,7 +13,7 @@ module.exports = function(server){
   router.post('/',
     server.middlewares.ensureAuthenticated,
     server.middlewares.bodyparser,
-    server.middlewares.ensureBodyFields('name'),
+    server.middlewares.ensureBodyFields('title'),
     server.actions.events.create
   );
 
