@@ -6,10 +6,7 @@ module.exports =  function(server){
     query.exec(function(err, data){
       if(err)
         return res.status(500).send(err);
-        setTimeout(function(){
-            res.cached.send(data);
-        }, 10000);
-
+      res.send(data);
     });
   }
 };

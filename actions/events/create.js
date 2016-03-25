@@ -4,22 +4,18 @@ module.exports = function(server){
     var User = server.models.User;
     var Category = server.models.Category;
 
-    Category.findOne({label: req.body.category}, function(errCategoryFind, category){
+    Category.findOne({ label: req.body.category.toLowerCase() }, function(errCategoryFind, category){
       var booth  = new Booth(req.body);
-
       if(!category){
-        var category = new Category({label:req.body.category});
-        category.save(function(errNewCategory, newCategory){
-          if (errNewCategory)
-            return res.status(500).send(errNewCategory);
-
-          booth.category = newCategory._id;
-          console.log("newcategory: " + newCategory);
-        });
-
-      } else {
-        booth.category = category._id;
+        var category = new Category({ label:req.body.category.toLowerCase() });
       }
+
+      category.events.push(booth._id);
+      category.save(function(error,categorySave){
+        if(error)
+          return res.status(500).send(categorySave);
+        booth.category = category._id;
+      });
 
       User.findById(req.auth.userId, function(errUser, user){
         if (errUser)
