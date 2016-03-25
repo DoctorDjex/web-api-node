@@ -38,7 +38,7 @@ module.exports = function(server){
     server.actions.events.update
   );
 
-  router.delete('/:name',
+  router.delete('/:id',
     server.actions.events.remove
   );
 
