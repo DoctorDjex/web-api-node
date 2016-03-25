@@ -1,17 +1,15 @@
 module.exports = function(server){
   return function(req, res, next){
-    var Event = server.models.Event;
+    var Booth = server.models.Event;
     var User = server.models.User;
     var Category = server.models.Category;
 
-    var booth  = new Event(req.body);
-  console.log(req.body.category);
-    Category.find({label: req.body.category}, function(errCategoryFind, category){
-      console.log("category: " +category);
-      if (!category){
+    Category.findOne({label: req.body.category}, function(errCategoryFind, category){
+      var booth  = new Booth(req.body);
+
+      if(!category){
         var category = new Category({label:req.body.category});
         category.save(function(errNewCategory, newCategory){
-
           if (errNewCategory)
             return res.status(500).send(errNewCategory);
 
@@ -19,7 +17,7 @@ module.exports = function(server){
           console.log("newcategory: " + newCategory);
         });
 
-      }else{
+      } else {
         booth.category = category._id;
       }
 
@@ -36,11 +34,8 @@ module.exports = function(server){
             return res.status(500).send(errBooth);
 
           res.send(booth);
-
         });
-
       });
-
     });
   }
 };
