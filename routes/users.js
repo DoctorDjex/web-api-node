@@ -10,7 +10,7 @@ module.exports = function(server){
   router.get('/:id', server.actions.users.show);
   router.post('/',
     server.middlewares.bodyparser,
-    server.middlewares.ensureBodyFields(['password', 'email', 'username']),
+    server.middlewares.ensureBodyFields(['password', 'email']),
     server.actions.users.create
   );
 

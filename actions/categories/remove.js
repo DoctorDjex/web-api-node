@@ -5,7 +5,7 @@ module.exports = function(server) {
       if (err)
         return res.status(500).send(err);
 
-      res.cached.send(data);
+      res.send(data);
     })
   }
 };

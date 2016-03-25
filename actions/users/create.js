@@ -12,7 +12,7 @@ module.exports = function(server){
       if (err)
         return res.status(500).send(err);
       res.send(data);
-    })
+    });
     // Role.findOne({label: server.settings.DEFAULT_ROLE}, function(err, data){
     //   if (err)
     //     return res.status(500).send(err);

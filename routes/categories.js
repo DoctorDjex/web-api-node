@@ -22,7 +22,7 @@ module.exports = function(server){
     server.actions.categories.update
   );
 
-  router.delete('/:name',
+  router.delete('/:label',
     server.actions.categories.remove
   );
 
