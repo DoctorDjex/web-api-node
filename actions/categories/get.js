@@ -1,7 +1,7 @@
 module.exports =  function(server){
   return function(req, res, next){
-    var Event = server.models.Event;
-    var query = Event.find();
+    var Category = server.models.Category;
+    var query = Category.find();
 
     query.exec(function(err, data){
       if(err)
