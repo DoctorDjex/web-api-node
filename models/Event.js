@@ -8,9 +8,13 @@ module.exports = function(server){
             type: String,
             required: true
         },
-        date:{
-         type: String,
-         required : true
+        startDate: {
+            type: Date,
+            required : true
+        },
+        endDate: {
+            type: Date,
+            required : true
         },
         location:{
             type: String,
@@ -35,7 +39,6 @@ module.exports = function(server){
             type:server.mongoose.Schema.Types.ObjectId,
             ref: 'User'
         }]
-
     });
 
     EventSchema.plugin(require('mongoose-timestamp'));

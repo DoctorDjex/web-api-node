@@ -21,6 +21,7 @@ module.exports = function(server){
     server.middlewares.ensureAuthenticated,
     server.middlewares.getUser,
     server.middlewares.bodyparser,
+    server.middlewares.eventRegistration.startDate,
     server.actions.events.registration
   )
 

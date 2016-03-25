@@ -5,6 +5,14 @@ module.exports = function(server){
     var Category = server.models.Category;
 
     Category.findOne({label: req.body.category}, function(errCategoryFind, category){
+      req.body.startDate = new Date(req.body.startDate);
+      req.body.endDate = new Date(req.body.endDate);
+
+      if( !req.body.startDate || !req.body.endDate )
+        return res.status(500).send({error: "Start date or end date is not ISO."});
+      if( req.body.startDate >= req.body.endDate )
+        return res.status(500).send({error: "Start date must be earlier than end date"});
+
       var booth  = new Booth(req.body);
 
       if(!category){

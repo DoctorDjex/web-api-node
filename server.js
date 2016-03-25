@@ -3,7 +3,6 @@ var server = express();
 
 require('./settings')(server);
 require('./models')(server);
-require('./cache')(server);
 require('./middlewares')(server);
 require('./actions')(server);
 require('./routes')(server);
