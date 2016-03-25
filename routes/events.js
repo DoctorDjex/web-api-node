@@ -39,6 +39,9 @@ module.exports = function(server){
   );
 
   router.delete('/:id',
+    server.middlewares.ensureAuthenticated,
+    server.middlewares.getUser,
+    server.middlewares.is(["owner"], "Event"),
     server.actions.events.remove
   );
 

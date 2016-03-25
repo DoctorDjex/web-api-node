@@ -27,7 +27,7 @@ module.exports = function(server){
       });
 
       function isOwner(resource){
-        return JSON.stringify(resource.user) === JSON.stringify(req.auth.user._id);
+        return JSON.stringify(resource.organizer) === JSON.stringify(req.auth.user._id);
       }
 
       function hasRole(role){
