@@ -9,6 +9,8 @@ module.exports = function(server){
     server.actions.users.me
   );
 
+  router.get('/event/:id', server.actions.users.getByEvent);
+  
   router.get('/:id', server.actions.users.show);
   router.post('/',
     server.middlewares.bodyparser,

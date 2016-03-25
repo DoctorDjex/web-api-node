@@ -4,6 +4,7 @@ module.exports = function(server){
     var Query = User.findById(req.params.id)
         .populate("role");
 
+
     Query.exec(function(err, data){
       if (err)
         return res.status(500).send(err);
