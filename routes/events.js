@@ -17,12 +17,20 @@ module.exports = function(server){
     server.actions.events.create
   );
 
-  router.post('/registration/:id',
+  router.post('/register/:id',
     server.middlewares.ensureAuthenticated,
     server.middlewares.getUser,
     server.middlewares.bodyparser,
     server.middlewares.eventRegistration.startDate,
     server.actions.events.registration
+  )
+
+  router.delete('/unregister/:id',
+    server.middlewares.ensureAuthenticated,
+    server.middlewares.getUser,
+    server.middlewares.bodyparser,
+    server.middlewares.eventRegistration.startDate,
+    server.actions.events.unregistration
   )
 
   router.put('/:id',

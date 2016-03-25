@@ -5,6 +5,7 @@ module.exports = function(server) {
     remove: require('./remove')(server),
     get: require('./get')(server),
     show: require('./show')(server),
-    registration: require('./registration')(server)
+    registration: require('./registration')(server),
+    unregistration: require('./unregistration')(server)
   }
 };

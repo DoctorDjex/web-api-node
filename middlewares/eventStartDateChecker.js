@@ -12,8 +12,6 @@ module.exports = function(server){
 
       var startDate = new Date(booth.startDate);
 
-      console.log(startDate);
-      console.log(date);
       if( startDate < date )
         return res.status(500).send({error: "Event has already begun"});
 
