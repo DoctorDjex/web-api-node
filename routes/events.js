@@ -3,7 +3,7 @@ var bodyparser = require('body-parser').json();
 
 module.exports = function(server){
   router.get('/',
-    server.middlewares.cache.get,
+    server.middlewares.cache.get
   );
 
   router.get('/:id',
