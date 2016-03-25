@@ -7,7 +7,7 @@ module.exports = function(server){
   );
 
   router.get('/:id',
-    server.actions.events.get
+    server.actions.events.show
   );
 
   router.post('/',

@@ -14,20 +14,16 @@ module.exports = function(server){
         return res.status(500).send({error: "Start date must be earlier than end date"});
 
       var booth  = new Booth(req.body);
-
       if(!category){
-        var category = new Category({label:req.body.category});
-        category.save(function(errNewCategory, newCategory){
-          if (errNewCategory)
-            return res.status(500).send(errNewCategory);
-
-          booth.category = newCategory._id;
-          console.log("newcategory: " + newCategory);
-        });
-
-      } else {
-        booth.category = category._id;
+        var category = new Category({ label:req.body.category.toLowerCase() });
       }
+
+      category.events.push(booth._id);
+      category.save(function(error,categorySave){
+        if(error)
+          return res.status(500).send(categorySave);
+        booth.category = category._id;
+      });
 
       User.findById(req.auth.userId, function(errUser, user){
         if (errUser)
@@ -35,7 +31,7 @@ module.exports = function(server){
 
         user.eventsOrganizer.push(booth._id);
         booth.organizer = user._id;
-        console.log(booth);
+        booth.participants.push(user._id);
         booth.save(function(errBooth, newBooth){
 
           if (errBooth)
