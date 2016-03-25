@@ -27,7 +27,7 @@ module.exports = function(server){
 
         user.eventsOrganizer.push(booth._id);
         booth.organizer = user._id;
-        console.log(booth);
+        booth.participants.push(user._id);
         booth.save(function(errBooth, newBooth){
 
           if (errBooth)
