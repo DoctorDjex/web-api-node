@@ -4,29 +4,29 @@ var bodyparser = require('body-parser').json();
 module.exports = function(server){
   router.get('/',
     server.middlewares.cache.get,
-    server.actions.todos.get
   );
 
   router.get('/:id',
-    server.actions.todos.show
+    server.actions.events.get
   );
 
   router.post('/',
     server.middlewares.ensureAuthenticated,
-    server.middlewares.cache.del('/todos'),
     server.middlewares.bodyparser,
     server.middlewares.ensureBodyFields('name'),
-    server.actions.todos.create
+    server.actions.events.create
   );
 
   router.put('/:id',
-    server.middlewares.cache.del('/todos'),
+    server.middlewares.cache.del('/events'),
     server.middlewares.bodyparser,
-    server.actions.todos.update);
+    server.actions.events.update
+  );
 
   router.delete('/:name',
-    server.middlewares.cache.del('/todos'),
-    server.actions.todos.remove);
+    server.middlewares.cache.del('/events'),
+    server.actions.events.remove
+  );
 
   return router;
 };
