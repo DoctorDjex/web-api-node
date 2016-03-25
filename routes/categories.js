@@ -10,21 +10,5 @@ module.exports = function(server){
     server.actions.categories.show
   );
 
-  router.post('/',
-    server.middlewares.ensureAuthenticated,
-    server.middlewares.bodyparser,
-    server.middlewares.ensureBodyFields('label'),
-    server.actions.categories.create
-  );
-
-  router.put('/:id',
-    server.middlewares.bodyparser,
-    server.actions.categories.update
-  );
-
-  router.delete('/:label',
-    server.actions.categories.remove
-  );
-
   return router;
 };
