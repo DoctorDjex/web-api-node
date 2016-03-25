@@ -4,8 +4,10 @@ module.exports = function(server){
   router.get('/', server.actions.users.get);
 
   router.get('/me',
-  server.middlewares.ensureAuthenticated,
-  server.actions.users.me);
+    server.middlewares.ensureAuthenticated,
+    server.middlewares.getUser,
+    server.actions.users.me
+  );
 
   router.get('/:id', server.actions.users.show);
   router.post('/',

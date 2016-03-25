@@ -8,5 +8,6 @@ module.exports = function(server) {
         Event : require('./Event')(server),
         Category : require('./Category')(server),
         Token : require('./Token')(server),
+        Role : require('./Role')(server)
     };
 };

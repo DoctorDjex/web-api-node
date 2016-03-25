@@ -5,6 +5,8 @@ module.exports = function(server){
 
   router.get('/:id', server.actions.roles.show);
   router.post('/',
+    server.middlewares.ensureAuthenticated,
+    server.middlewares.getUser,
     server.middlewares.bodyparser,
     server.middlewares.ensureBodyFields('label'),
     server.actions.roles.create
